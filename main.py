@@ -2,8 +2,11 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, DateTimeField, IntegerField
 from wtforms.validators import DataRequired
+from datetime import datetime
+from app import send_email, watering_reminder
+
 
 
 app = Flask(__name__)
@@ -21,7 +24,7 @@ class Plant(db.Model):
     __tablename__ = 'garden'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), unique=True, nullable=False)
-    date_created = db.Column(db.Integer, nullable=False)
+    date_created = db.Column(db.Date, nullable=False)
     position = db.Column(db.String(250), nullable=False)
     water_needs = db.Column(db.Integer, nullable=False)
 
@@ -32,13 +35,16 @@ db.create_all()
 
 class AddPlant(FlaskForm):
     name = StringField("Plant name:", validators=[DataRequired()])
-    date = StringField("Date:", validators=[DataRequired()])
+    date = DateTimeField("Date:",
+                         format="%Y-%m-%d",
+                         default=datetime.now().date(),
+                         validators=[DataRequired()])
     position = StringField("Position:", validators=[DataRequired()])
-    water = StringField("Water needs every:(days)", validators=[DataRequired()])
+    water = IntegerField("Water needs every:(days)", validators=[DataRequired()])
     add = SubmitField("Add plant")
 
 class ChangeWater(FlaskForm):
-    new_water = StringField("New water plan:(days)", validators=[DataRequired()])
+    new_water = IntegerField("New water plan:(days)", validators=[DataRequired()])
     change = SubmitField("Change")
 
 
@@ -60,8 +66,8 @@ def add():
         )
         db.session.add(new_plant)
         db.session.commit()
+        watering_reminder(form.water.data)
         return redirect(url_for('garden'))
-
     return render_template("add.html", form=form)
 
 
