@@ -20,5 +20,5 @@
 </ul>
 {% endfor %}
 
-        <a href="{{ url_for('add') }}">Add New Plant</a>
+        <a href="{{ url_for('add', id=plant.id) }}">Add New Plant</a>
 {% endblock %}

@@ -69,13 +69,13 @@ def add():
 def edit():
     form = ChangeWater()
     plant_id = request.args.get('id')
-    update_plant = Plant.query.get(plant_id)
+    plant = Plant.query.get(plant_id)
     if form.validate_on_submit():
-        update_plant.water_needs = form.new_water.data
+        plant.water_needs = form.new_water.data
         db.session.commit()
         return redirect(url_for('garden'))
 
-    return render_template("edit.html", form=form)
+    return render_template("edit.html", form=form, plant=plant)
 
 
 @app.route("/delete")
