@@ -1,25 +1,25 @@
-from datetime import datetime, timedelta
 import smtplib
-import time
 from apscheduler.schedulers.background import BackgroundScheduler
 
-def send_email():
-    MY_EMAIL = "********"
-    MY_PASSWORD = "********"
+
+def send_email(name, position):
+    MY_EMAIL = "korist.h@gmail.com"
+    MY_PASSWORD = "eqfgemst1564"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
         connection.sendmail(
             from_addr=MY_EMAIL,
             to_addrs=MY_EMAIL,
-            msg=f"Subject: Your garden needs to be watered! \n\n Your plant is out of water. You should water it."
-
-
+            msg=f"Subject: Your garden needs to be watered! \n\n Your {name} which is positioned in {position} "
+                f"is out of water. You should water it."
 
     )
-def watering_reminder(minutes):
+
+
+def watering_reminder(minutes, name, position, id):
     scheduler = BackgroundScheduler()
-    scheduler.add_job(send_email,"interval", minutes=minutes)
+    scheduler.add_job(send_email,"interval",[name, position],id=id, minutes=minutes, max_instances=100, replace_existing=True)
     scheduler.start()
 
 

@@ -1,17 +1,11 @@
 body {
 background-color: #333;
-color: black;
+color: white;
 }
 
 a {
     color: #ffc107;
-
 }
-
-footer {
-    padding: 10vh 0 0 0;
-}
-
 
 .jumbotron {
   display: flex;

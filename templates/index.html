@@ -6,8 +6,11 @@
 {% endblock %}
 
 {% block title %} Garden  {% endblock %}
+{% block navbar %}
 
+{% endblock %}
 {% block content %}
+
 
 
 <div class="jumbotron text-center">
@@ -16,14 +19,12 @@
   <p class="lead">Do you have plenty of houseplants and repeatedly forgot to water them?</p>
   <hr class="my-4">
   <p>You've found the right place! This app will send you email every time your plants need to be water.</p>
-
-
-        <a href="{{ url_for('garden') }}">Visit your garden</a>
+  <a class="btn btn-warning btn-lg" href="{{ url_for('garden') }}" role="button">Visit your garden</a>
         </div>
     </div>
   <footer>
     <div class="container">
-          <p class="copyright text-muted">Copyright &copy; Jan Kořistka 2021</p>
+          <p class="copyright text-muted">Built with all the love in the world by Jan Kořistka</p>
     </div>
   </footer>
 {% endblock %}

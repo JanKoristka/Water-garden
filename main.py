@@ -5,7 +5,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateTimeField, IntegerField
 from wtforms.validators import DataRequired
 from datetime import datetime
-from app import send_email, watering_reminder
+from app import watering_reminder
+
 
 
 
@@ -18,7 +19,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-##CREATE TABLE
 
 class Plant(db.Model):
     __tablename__ = 'garden'
@@ -39,7 +39,7 @@ class AddPlant(FlaskForm):
                          format="%Y-%m-%d",
                          default=datetime.now().date(),
                          validators=[DataRequired()])
-    position = StringField("Position:", validators=[DataRequired()])
+    position = StringField("Position in house:", validators=[DataRequired()])
     water = IntegerField("Water needs every:(days)", validators=[DataRequired()])
     add = SubmitField("Add plant")
 
@@ -66,7 +66,9 @@ def add():
         )
         db.session.add(new_plant)
         db.session.commit()
-        watering_reminder(form.water.data)
+        watering_reminder(form.water.data, form.name.data, form.position.data,)
+
+
         return redirect(url_for('garden'))
     return render_template("add.html", form=form)
 
@@ -79,6 +81,7 @@ def edit():
     if form.validate_on_submit():
         plant.water_needs = form.new_water.data
         db.session.commit()
+        #watering_reminder(form.new_water.data) #form.name.data, form.position.data)
         return redirect(url_for('garden'))
 
     return render_template("edit.html", form=form, plant=plant)
@@ -90,6 +93,7 @@ def delete():
     plant_to_delete = Plant.query.get(plant_id)
     db.session.delete(plant_to_delete)
     db.session.commit()
+    # job.remove()
     return redirect(url_for('garden'))
 
 @app.route("/garden")
