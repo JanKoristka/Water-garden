@@ -3,8 +3,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 
 def send_email(name, position):
-    MY_EMAIL = "korist.h@gmail.com"
-    MY_PASSWORD = "eqfgemst1564"
+    MY_EMAIL = "xxxxx"
+    MY_PASSWORD = "xxxxxx"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
