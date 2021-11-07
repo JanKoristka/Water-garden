@@ -2,10 +2,10 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateTimeField, IntegerField
+from wtforms import StringField, SubmitField, DateTimeField, IntegerField, SelectField
 from wtforms.validators import DataRequired
 from datetime import datetime
-from app import watering_reminder
+from app import watering_reminder, get_image
 
 
 
@@ -27,6 +27,7 @@ class Plant(db.Model):
     date_created = db.Column(db.Date, nullable=False)
     position = db.Column(db.String(250), nullable=False)
     water_needs = db.Column(db.Integer, nullable=False)
+    img_url = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
         return f" Plant name is {self.name} and it needs to be water every {self.water_needs} days"
@@ -34,7 +35,7 @@ class Plant(db.Model):
 db.create_all()
 
 class AddPlant(FlaskForm):
-    name = StringField("Plant name:", validators=[DataRequired()])
+    name = StringField("Latin name:", validators=[DataRequired()])
     date = DateTimeField("Date:",
                          format="%Y-%m-%d",
                          default=datetime.now().date(),
@@ -62,11 +63,12 @@ def add():
             name=form.name.data,
             date_created=form.date.data,
             position=form.position.data,
-            water_needs=form.water.data
+            water_needs=form.water.data,
+            img_url=get_image(form.name.data),
         )
         db.session.add(new_plant)
         db.session.commit()
-        watering_reminder(form.water.data, form.name.data, form.position.data,)
+        #watering_reminder(form.water.data, form.name.data, form.position.data)
 
 
         return redirect(url_for('garden'))
@@ -100,6 +102,15 @@ def delete():
 def garden():
     all_plants = db.session.query(Plant).all()
     return render_template("my_garden.html", plants=all_plants)
+
+@app.route("/photo")
+def photo():
+    plant_id = request.args.get('id')
+    plant_to_show = Plant.query.get(plant_id)
+    return render_template("show_photo.html", plant=plant_to_show)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

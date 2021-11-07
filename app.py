@@ -1,6 +1,6 @@
 import smtplib
 from apscheduler.schedulers.background import BackgroundScheduler
-
+import requests
 
 def send_email(name, position):
     MY_EMAIL = "xxxxx"
@@ -25,20 +25,20 @@ def watering_reminder(minutes, name, position, id):
 
 
 
-# def watering_reminder(frequency):
-# now = datetime.now().date()
-# print(now)
 
-
-# future = now + timedelta(days=6)
-# print(future)
-# x = future - now
-# print(x)
-#     frequency = timedelta(days=[watter_needs])
-#     new_watering = plant["date"] + frequency
-#     next_water = new_watering + frequency
-#     #
-#     # next_water = now + timedelta(days=frequency)
-#     # if now == next_water:
-#     #     send_email()
+def get_image(name):
+    S = requests.Session()
+    URL = "https://en.wikipedia.org/w/api.php"
+    PARAMS = {
+            "action": "query",
+            "format": "json",
+            "titles": name,
+            "prop": "pageimages",
+            "formatversion": 2,
+            "pithumbsize": 500,
+    }
+    R = S.get(url=URL, params=PARAMS)
+    DATA = R.json()
+    page_source = DATA['query']['pages'][0]['thumbnail']['source']
+    return page_source
 
