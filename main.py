@@ -24,29 +24,31 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-class Plant(db.Model):
-    __tablename__ = 'garden'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), unique=True, nullable=False)
-    date_created = db.Column(db.Date, nullable=False)
-    position = db.Column(db.String(250), nullable=False)
-    water_needs = db.Column(db.Integer, nullable=False)
-    img_url = db.Column(db.String(250), nullable=False)
-
-
 class User(UserMixin, db.Model):
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
+    watering = db.relationship("Watering")
 
-# class Watering(db.Model):
-#     watering_id = db.Column(db.Integer, primary_key=True)
-#     plant_id = db.Column(db.Integer, unique=True)
-#     water_every_n_days = db.Column(db.Integer, nullable=False)
-#     position = db.Column(db.String(250),nullable=False)
-#     last_watering = db.Column(db.Integer, nullable=False)
+
+class Plant(db.Model):
+    __tablename__ = 'plant'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), unique=True, nullable=False)
+    img_url = db.Column(db.String(250), nullable=False)
+    watering = db.relationship("Watering")
+
+class Watering(db.Model):
+    __tablename__ = 'watering'
+    id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.Date, nullable=False)
+    position = db.Column(db.String(250), nullable=False)
+    water_needs = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey("user.id"), nullable=False)
+    plant_id = db.Column(db.Integer,db.ForeignKey("plant.id"), nullable=False)
+
 
 db.create_all()
 
@@ -133,15 +135,19 @@ def add():
     if form.validate_on_submit():
         new_plant = Plant(
             name=form.name.data,
+            img_url=get_image(form.name.data),
+        )
+        new_info = Watering(
             date_created=form.date.data,
             position=form.position.data,
             water_needs=form.water.data,
-            img_url=get_image(form.name.data),
+            plant_id=new_plant.id,
+            user_id=1,
         )
         db.session.add(new_plant)
+        db.session.add(new_info)
         db.session.commit()
         #watering_reminder(form.water.data, form.name.data, form.position.data)
-
 
         return redirect(url_for('garden'))
     return render_template("add.html", form=form)
@@ -175,8 +181,9 @@ def delete():
 @app.route("/garden")
 @login_required
 def garden():
-    all_plants = db.session.query(Plant).all()
-    return render_template("my_garden.html", plants=all_plants)
+    plant = db.session.query(Plant).all()
+    watering = db.session.query(Watering).all()
+    return render_template("my_garden.html", plants=plant, watering=watering)
 
 @app.route("/photo")
 @login_required

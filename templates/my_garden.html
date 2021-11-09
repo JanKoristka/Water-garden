@@ -29,17 +29,21 @@
         {% endif %}
 
 {% for plant in plants %}
+
 <ul>
         <li>
             <a class="btn btn-primary btn-sm" href="{{ url_for('delete', id=plant.id) }}">Delete</a>
-            {{plant.name}} - {{plant.date_created}} - {{plant.position}} - {{plant.water_needs}}
+            {{plant.name}}
             <a class="btn btn-primary btn-sm" href="{{ url_for('edit', id=plant.id) }}">Change water needs</a>
             <a class="btn btn-primary btn-sm" href="{{ url_for('photo', id=plant.id) }}">Show photo</a>
+{% endfor %}
+{% for info in watering %}
+            {{info.date_created}} - {{info.position}} - {{info.water_needs}}
+{% endfor %}
+
+
         </li>
 </ul>
-
-
-{% endfor %}
 
         <a class="btn btn-warning" href="{{ url_for('add') }}">Add New Plant</a>
 
