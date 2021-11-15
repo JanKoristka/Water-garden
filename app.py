@@ -2,6 +2,8 @@ import smtplib
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
 
+import time
+
 def send_email(name, position):
     MY_EMAIL = "xxxxx"
     MY_PASSWORD = "xxxxxx"

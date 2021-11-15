@@ -28,18 +28,22 @@
         <p class="lead text-center">Garden is empty😟</p>
         {% endif %}
 
-{% for plant in plants %}
 
 <ul>
-        <li>
-            <a class="btn btn-primary btn-sm" href="{{ url_for('delete', id=plant.id) }}">Delete</a>
+    <li>
+{% for info in watering %}
+            {{info.date_created}} | {{info.position}} |
+{% endfor %}
+
+
+{% for plant in plants %}
             {{plant.name}}
+            <a class="btn btn-primary btn-sm" href="{{ url_for('delete', id=plant.id) }}">Delete</a>
             <a class="btn btn-primary btn-sm" href="{{ url_for('edit', id=plant.id) }}">Change water needs</a>
             <a class="btn btn-primary btn-sm" href="{{ url_for('photo', id=plant.id) }}">Show photo</a>
+
 {% endfor %}
-{% for info in watering %}
-            {{info.date_created}} - {{info.position}} - {{info.water_needs}}
-{% endfor %}
+
 
 
         </li>

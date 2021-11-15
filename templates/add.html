@@ -8,11 +8,21 @@
 
 {% block title %}Add Plant{% endblock %}
 
+
 {% block content %}
+
 
     <form method="POST" action="{{ url_for('add') }}" >
         {{ form.hidden_tag() }}
         {{ wtf.quick_form(form,novalidate=True) }}
     </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<hr>
+ <p style="text-align:left"><font color="red" size="+1">{{ message }}</font></p>
+{% endfor %}
+{% endif %}
+{% endwith %}
 
 {% endblock %}

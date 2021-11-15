@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateTimeField, IntegerField, SelectField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, InputRequired
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -53,7 +53,8 @@ class Watering(db.Model):
 db.create_all()
 
 class AddPlant(FlaskForm):
-    name = StringField("Latin name:", validators=[DataRequired()])
+    name = StringField("Latin name:",
+                       validators=[DataRequired()])
     date = DateTimeField("Date:",
                          format="%Y-%m-%d",
                          default=datetime.now().date(),
@@ -132,24 +133,27 @@ def logout():
 @login_required
 def add():
     form = AddPlant()
-    if form.validate_on_submit():
-        new_plant = Plant(
-            name=form.name.data,
-            img_url=get_image(form.name.data),
-        )
-        new_info = Watering(
-            date_created=form.date.data,
-            position=form.position.data,
-            water_needs=form.water.data,
-            plant_id=new_plant.id,
-            user_id=1,
-        )
-        db.session.add(new_plant)
-        db.session.add(new_info)
-        db.session.commit()
-        #watering_reminder(form.water.data, form.name.data, form.position.data)
+    try:
+        if form.validate_on_submit():
+            new_plant = Plant(
+                name=form.name.data,
+                img_url=get_image(form.name.data),
+            )
+            db.session.add(new_plant)
+            db.session.flush()
+            new_info = Watering(
+                date_created=form.date.data,
+                position=form.position.data,
+                water_needs=form.water.data,
+                plant_id=new_plant.id,
+                user_id=1,
+            )
+            db.session.add(new_info)
+            db.session.commit()
+            return redirect(url_for('garden'))
+    except KeyError:
+        flash("Incorrect name of the plant :-( Be sure that the name of the plant is in correct english latin version!")
 
-        return redirect(url_for('garden'))
     return render_template("add.html", form=form)
 
 
@@ -192,7 +196,15 @@ def photo():
     plant_to_show = Plant.query.get(plant_id)
     return render_template("show_photo.html", plant=plant_to_show)
 
+# def function():
+#     for name in User().query.all():
+#         if name.name ==
 
+#schedule.every().day.at("09:00").do(function)
+# while True:
+#
+#     schedule.run_pending()
+#     time.sleep(1)
 
 
 if __name__ == "__main__":
