@@ -58,7 +58,7 @@ class AddPlant(FlaskForm):
                          format="%Y-%m-%d",
                          default=datetime.now().date(),
                          validators=[DataRequired()])
-    position = StringField("Position in house:", validators=[DataRequired()])
+    position = StringField("Room in your house:", validators=[DataRequired()])
     water = IntegerField("Water needs every:(days)", validators=[DataRequired()])
     add = SubmitField("Add plant")
 
@@ -134,25 +134,26 @@ def add():
     form = AddPlant()
     try:
         if form.validate_on_submit():
-            new_plant = Plant(
-                name=form.name.data,
-                img_url=get_image(form.name.data),
-            )
-            db.session.add(new_plant)
-            db.session.flush()
+            new_plant = Plant.query.filter_by(name=form.name.data).first()
+            if new_plant is None:
+                new_plant = Plant(
+                    name=form.name.data,
+                    img_url=get_image(form.name.data),
+                )
+                db.session.add(new_plant)
+                db.session.flush()
             new_info = Watering(
                 date_created=form.date.data,
                 position=form.position.data,
                 water_needs=form.water.data,
                 plant_id=new_plant.id,
-                user_id=1,
+                user_id=current_user.id,
             )
             db.session.add(new_info)
             db.session.commit()
             return redirect(url_for('garden'))
     except KeyError:
         flash("Incorrect name of the plant :-( Be sure that the name of the plant is in correct english latin version!")
-
     return render_template("add.html", form=form)
 
 
@@ -161,11 +162,10 @@ def add():
 def edit():
     form = ChangeWater()
     plant_id = request.args.get('id')
-    plant = Plant.query.get(plant_id)
+    plant = Watering.query.filter(Watering.user_id == current_user.id).filter(Watering.plant_id == plant_id)
     if form.validate_on_submit():
         plant.water_needs = form.new_water.data
         db.session.commit()
-        #watering_reminder(form.new_water.data) #form.name.data, form.position.data)
         return redirect(url_for('garden'))
 
     return render_template("edit.html", form=form, plant=plant)
@@ -175,18 +175,16 @@ def edit():
 @login_required
 def delete():
     plant_id = request.args.get('id')
-    plant_to_delete = Plant.query.get(plant_id)
-    db.session.delete(plant_to_delete)
+    Watering.query.filter(Watering.user_id == current_user.id).filter(Watering.plant_id == plant_id).delete()
     db.session.commit()
-    # job.remove()
     return redirect(url_for('garden'))
 
 @app.route("/garden")
 @login_required
 def garden():
-    plant = db.session.query(Plant).all()
-    watering = db.session.query(Watering).all()
-    return render_template("my_garden.html", plants=plant, watering=watering)
+    plant = db.session.query(Watering.position, Watering.water_needs, Plant.name, Plant.id).join(Plant,
+    Plant.id == Watering.plant_id).filter(Watering.user_id == current_user.id)
+    return render_template("my_garden.html", plants=plant)
 
 @app.route("/photo")
 @login_required

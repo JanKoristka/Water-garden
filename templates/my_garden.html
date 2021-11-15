@@ -17,7 +17,6 @@
 
 {% block content %}
 
-
 <div class="jumbotron text-center">
     <div class="container">
         <h1 class="display-4">🪴️ My Garden 🪴</h1>
@@ -28,27 +27,26 @@
         <p class="lead text-center">Garden is empty😟</p>
         {% endif %}
 
-
 {% for plant in plants %}
 <ul>
         <li>
-             | {{plant.name}}
             <a class="btn btn-primary btn-sm" href="{{ url_for('delete', id=plant.id) }}">Delete</a>
+            {{plant.name}} | {{plant.position}} | Should be watered every {{plant.water_needs}} days
             <a class="btn btn-primary btn-sm" href="{{ url_for('edit', id=plant.id) }}">Change water needs</a>
             <a class="btn btn-primary btn-sm" href="{{ url_for('photo', id=plant.id) }}">Show photo</a>
-
         </li>
 
 </ul>
-
 {% endfor %}
         <a class="btn btn-warning" href="{{ url_for('add') }}">Add New Plant</a>
-
-    </div>
+            </div>
 </div>
+
+
 <footer>
     <div class="container">
           <p class="copyright text-muted">Built with all the love in the world by Jan Kořistka</p>
     </div>
 </footer>
+
 {% endblock %}
