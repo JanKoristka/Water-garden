@@ -53,8 +53,7 @@ class Watering(db.Model):
 db.create_all()
 
 class AddPlant(FlaskForm):
-    name = StringField("Latin name:",
-                       validators=[DataRequired()])
+    name = StringField("Latin name:", validators=[DataRequired()])
     date = DateTimeField("Date:",
                          format="%Y-%m-%d",
                          default=datetime.now().date(),
