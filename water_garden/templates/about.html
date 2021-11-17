@@ -10,7 +10,7 @@
 {% block navbar %}
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+        <a class="nav-link" href="{{ url_for('views.logout') }}">Log Out</a>
     </li>
 </ul>
 {% endblock %}
@@ -24,7 +24,7 @@
   <p class="lead">Do you have plenty of houseplants and repeatedly forgot to water them?</p>
   <hr class="my-4">
   <p>You've found the right place! This app will send you email every time your plants need to be water.</p>
-  <a class="btn btn-warning btn-lg" href="{{ url_for('garden') }}" role="button">Visit your garden</a>
+  <a class="btn btn-warning btn-lg" href="{{ url_for('views.garden') }}" role="button">Visit your garden</a>
         </div>
     </div>
   <footer>

@@ -12,7 +12,7 @@
 {% block content %}
 
 
-    <form method="POST" action="{{ url_for('add') }}" >
+    <form method="POST" action="{{ url_for('views.add') }}" >
         {{ form.hidden_tag() }}
         {{ wtf.quick_form(form,novalidate=True) }}
     </form>

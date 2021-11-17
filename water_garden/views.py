@@ -1,82 +1,33 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_bootstrap import Bootstrap
-from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateTimeField, IntegerField, SelectField
-from wtforms.validators import DataRequired, InputRequired
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask import render_template, redirect, url_for, request, flash, Blueprint
+from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
-from app import watering_reminder, get_image
+
+from water_garden.models import User, Plant, Watering
+from water_garden.forms import AddPlant, ChangeWater
+from water_garden.utils import get_image
+from water_garden.extensions import db, login_manager
 
 
-app = Flask(__name__)
+blueprint = Blueprint("views", __name__, static_folder="/static", template_folder='/templates')
 
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///my_plants.db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(UserMixin, db.Model):
-    __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
-    watering = db.relationship("Watering")
 
-
-class Plant(db.Model):
-    __tablename__ = 'plant'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), unique=True, nullable=False)
-    img_url = db.Column(db.String(250), nullable=False)
-    watering = db.relationship("Watering")
-
-class Watering(db.Model):
-    __tablename__ = 'watering'
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.Date, nullable=False)
-    position = db.Column(db.String(250), nullable=False)
-    water_needs = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer,db.ForeignKey("user.id"), nullable=False)
-    plant_id = db.Column(db.Integer,db.ForeignKey("plant.id"), nullable=False)
-
-
-db.create_all()
-
-class AddPlant(FlaskForm):
-    name = StringField("Latin name:", validators=[DataRequired()])
-    date = DateTimeField("Date:",
-                         format="%Y-%m-%d",
-                         default=datetime.now().date(),
-                         validators=[DataRequired()])
-    position = StringField("Room in your house:", validators=[DataRequired()])
-    water = IntegerField("Water needs every:(days)", validators=[DataRequired()])
-    add = SubmitField("Add plant")
-
-class ChangeWater(FlaskForm):
-    new_water = IntegerField("New water plan:(days)", validators=[DataRequired()])
-    change = SubmitField("Change")
-
-@app.route('/')
+@blueprint.route('/')
 def home():
     return render_template("index.html", logged_in=current_user.is_authenticated)
 
 
-@app.route('/about')
+@blueprint.route('/about')
 @login_required
 def about():
     return render_template("about.html")
 
-@app.route('/register', methods=["GET", "POST"])
+
+@blueprint.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
 
@@ -102,7 +53,7 @@ def register():
     return render_template("register.html", logged_in=current_user.is_authenticated)
 
 
-@app.route('/login', methods=["GET", "POST"])
+@blueprint.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get('email')
@@ -121,14 +72,14 @@ def login():
 
     return render_template("login.html", logged_in=current_user.is_authenticated)
 
-@app.route('/logout')
+@blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
 
-@app.route("/add", methods=["GET", "POST"])
+@blueprint.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
     form = AddPlant()
@@ -157,12 +108,12 @@ def add():
     return render_template("add.html", form=form)
 
 
-@app.route("/edit/", methods=["GET", "POST"])
+@blueprint.route("/edit/", methods=["GET", "POST"])
 @login_required
 def edit():
     form = ChangeWater()
-    plant_id = request.args.get('id')
-    plant = Watering.query.filter(Watering.user_id == current_user.id).filter(Watering.plant_id == plant_id)
+    water_id = request.args.get('id')
+    plant = Watering.query.filter(Watering.id == water_id).first()
     if form.validate_on_submit():
         plant.water_needs = form.new_water.data
         db.session.commit()
@@ -171,7 +122,7 @@ def edit():
     return render_template("edit.html", form=form, plant=plant)
 
 
-@app.route("/delete")
+@blueprint.route("/delete")
 @login_required
 def delete():
     plant_id = request.args.get('id')
@@ -179,33 +130,24 @@ def delete():
     db.session.commit()
     return redirect(url_for('garden'))
 
-@app.route("/garden")
+@blueprint.route("/garden")
 @login_required
 def garden():
     plant = db.session.query(Watering.position, Watering.water_needs, Plant.name, Plant.id).join(Plant,
-    Plant.id == Watering.plant_id).filter(Watering.user_id == current_user.id)
+    Plant.id == Watering.plant_id).join(User, User.id == Watering.user_id)#filter(Watering.user_id == current_user.id)
     return render_template("my_garden.html", plants=plant)
 
-@app.route("/photo")
+@blueprint.route("/photo")
 @login_required
 def photo():
     plant_id = request.args.get('id')
     plant_to_show = Plant.query.get(plant_id)
     return render_template("show_photo.html", plant=plant_to_show)
 
-# def function():
-#     for name in User().query.all():
-#         if name.name ==
-
-#schedule.every().day.at("09:00").do(function)
-# while True:
-#
-#     schedule.run_pending()
-#     time.sleep(1)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+
 
 
 

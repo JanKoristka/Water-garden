@@ -1,0 +1,20 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block title %} Edit Watering Info {% endblock %}
+
+{% block content %}
+
+
+     <form action="{{ url_for('views.edit', id=plant.id) }}" method="POST">
+        {{ wtf.quick_form(form,novalidate=True) }}
+    </form>
+
+
+
+{% endblock %}
