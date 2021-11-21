@@ -4,9 +4,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from water_garden.models import User, Plant, Watering
 from water_garden.forms import AddPlant, ChangeWater
-from water_garden.utils import get_image, send_email
+from water_garden.utils import get_image
 from water_garden.extensions import db, login_manager
+import logging
 
+
+logging.basicConfig(filename='record.log', level=logging.DEBUG, format=
+f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 blueprint = Blueprint("views", __name__, static_folder="/static", template_folder='/templates')
@@ -19,6 +23,7 @@ def load_user(user_id):
 
 @blueprint.route('/')
 def home():
+    blueprint.logger.info('Info level log')
     return render_template("index.html", logged_in=current_user.is_authenticated)
 
 
@@ -144,30 +149,4 @@ def photo():
     plant_id = request.args.get('id')
     plant_to_show = Plant.query.get(plant_id)
     return render_template("show_photo.html", plant=plant_to_show)
-
-
-
-# def watering_reminder():
-#     today = datetime.now().date()
-#     flower_to_water = {}
-#     for name in User.query.all():
-#         flower_to_water[name] = {}
-#         flower_to_water[name]["flower"] = []
-#         flower_to_water[name]["position"] = []
-#         user_email = name.email
-#         for plant in name.watering:
-#             #if (today - plant.date_created) % plant.water_needs == 0:
-#             flower_to_water[name].append(plant)
-#     for user,flowers in flower_to_water.items():
-#         send_email(user,flowers)
-#
-#
-#
-# schedule.every(2).minutes.do(watering_reminder)
-# while True:
-#      schedule.run_pending()
-#      time.sleep(1)
-
-
-
 

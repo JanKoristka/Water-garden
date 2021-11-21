@@ -2,6 +2,8 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from water_garden import views
+from apscheduler.schedulers.background import BackgroundScheduler
+from water_garden.utils import watering_reminder
 
 from water_garden.extensions import (
     db,
@@ -23,6 +25,9 @@ def create_app():
     register_extensions(app)
     register_blueprints(app)
 
+    scheduler = BackgroundScheduler(daemon=True)
+    scheduler.add_job(watering_reminder, trigger="interval", seconds=30, args=[app])
+    scheduler.start()
     return app
 
 

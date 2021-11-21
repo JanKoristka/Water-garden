@@ -1,14 +1,12 @@
 import smtplib
-import schedule
 import requests
-import time
 from datetime import datetime
 from water_garden.models import User, Plant, Watering
 
 
 def send_email(flowers, positions):
-    MY_EMAIL = "xxxxx"
-    MY_PASSWORD = "xxxxxx"
+    MY_EMAIL = "korist.h@gmail.com"
+    MY_PASSWORD = "eqfgemst1564"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
@@ -39,10 +37,10 @@ def get_image(name):
     page_source = DATA['query']['pages'][0]['thumbnail']['source']
     return page_source
 
-def watering_reminder():
+def watering_reminder(app):
     today = datetime.now().date()
     flower_to_water = {}
-    for name in User.query.all():
+    for name in session.Query(User).all():
         flower_to_water[name] = {}
         flower_to_water[name]["flower"] = []
         flower_to_water[name]["position"] = []
@@ -52,8 +50,3 @@ def watering_reminder():
             flower_to_water[name].append(plant)
     for user,flowers in flower_to_water.items():
         send_email(user,flowers)
-
-schedule.every(2).minutes.do(watering_reminder)
-while True:
-     schedule.run_pending()
-     time.sleep(1)
