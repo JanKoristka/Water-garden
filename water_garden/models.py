@@ -7,7 +7,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-    watering = db.relationship("Watering")
+    watering = db.relationship("Watering", back_populates="user")
 
 
 class Plant(db.Model):
@@ -15,7 +15,7 @@ class Plant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), unique=True, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
-    watering = db.relationship("Watering")
+    watering = db.relationship("Watering", back_populates="plant")
 
 class Watering(db.Model):
     __tablename__ = 'watering'
@@ -25,4 +25,6 @@ class Watering(db.Model):
     water_needs = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey("user.id"), nullable=False)
     plant_id = db.Column(db.Integer,db.ForeignKey("plant.id"), nullable=False)
+    plant = db.relationship("Plant", back_populates="watering")
+    user = db.relationship("User", back_populates="watering")
 

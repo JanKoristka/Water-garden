@@ -1,25 +1,24 @@
 import smtplib
 import requests
 from datetime import datetime
-from water_garden.models import User
+from water_garden.models import User, Plant
 from water_garden.extensions import db
 
 
-def send_email(flowers, positions):
-    MY_EMAIL = "xxxxxx"
-    MY_PASSWORD = "xxxxx"
+def send_email(email, flowers, positions):
+    MY_EMAIL = "xxxxxxx"
+    MY_PASSWORD = "xxxxxxx"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
-        msq = ""
+        msg = ""
         for flower, position in zip(flowers, positions):
-            msq += f"flower {flower} positioned on {position}"
+            msg += f"flower {flower} positioned on {position}\n"
+            final_msg = f"Subject: Your garden needs to be watered! \n\n {msg}"
         connection.sendmail(
             from_addr=MY_EMAIL,
-            to_addrs=MY_EMAIL,
-            msg=f"Subject: Your garden needs to be watered! \n\n {msg}"
-
-
+            to_addrs=email,
+            msg=final_msg
     )
 
 def get_image(name):
@@ -45,11 +44,15 @@ def watering_reminder(app):
         query = db.session.query(User)
         for user in query:
             flower_to_water[user] = {}
+            flower_to_water[user]["email"] = user.email
             flower_to_water[user]["flower"] = []
             flower_to_water[user]["position"] = []
             for plant in user.watering:
                 if (today - plant.date_created).days % plant.water_needs == 0:
-                    flower_to_water[user]["flower"].append(plant.plant_id)
+                    flower_to_water[user]["flower"].append(plant.plant.name)
                     flower_to_water[user]["position"].append(plant.position)
-    for flowers,position in flower_to_water.items():
-        print(flowers, position)
+    for user in flower_to_water:
+        flowers = flower_to_water[user]["flower"]
+        positions = flower_to_water[user]["position"]
+        email = flower_to_water[user]["email"]
+        send_email(email, flowers, positions)

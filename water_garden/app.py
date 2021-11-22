@@ -26,7 +26,7 @@ def create_app():
     register_blueprints(app)
 
     scheduler = BackgroundScheduler(daemon=True)
-    scheduler.add_job(watering_reminder, trigger="interval", seconds=30, args=[app])
+    scheduler.add_job(watering_reminder, trigger="interval", days=1, args=[app])
     scheduler.start()
     return app
 

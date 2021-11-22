@@ -7,13 +7,15 @@ from water_garden.forms import AddPlant, ChangeWater
 from water_garden.utils import get_image
 from water_garden.extensions import db, login_manager
 import logging
-
+from flask.logging import default_handler
+#from water_garden.app import create_app
 
 #logging.basicConfig(filename='record.log', level=logging.DEBUG, format=
 #f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 blueprint = Blueprint("views", __name__, static_folder="/static", template_folder='/templates')
+
 
 
 @login_manager.user_loader
@@ -23,7 +25,7 @@ def load_user(user_id):
 
 @blueprint.route('/')
 def home():
-    #blueprint.logger.info('Info level log')
+    #app.logger.info('Processing default request')
     return render_template("index.html", logged_in=current_user.is_authenticated)
 
 
