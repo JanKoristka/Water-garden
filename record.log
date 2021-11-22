@@ -1,0 +1,169 @@
+2021-11-22 15:16:33,257 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:16:33,261 INFO apscheduler.scheduler MainThread : Added job "watering_reminder" to job store "default"
+2021-11-22 15:16:33,261 INFO apscheduler.scheduler MainThread : Scheduler started
+2021-11-22 15:16:33,262 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:16:33,262 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:17:03.257596+01:00 (in 29.994983 seconds)
+2021-11-22 15:16:33,338 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:16:35,489 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:16:35,491 INFO apscheduler.scheduler MainThread : Added job "watering_reminder" to job store "default"
+2021-11-22 15:16:35,492 INFO apscheduler.scheduler MainThread : Scheduler started
+2021-11-22 15:16:35,493 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:16:35,493 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:17:05.489440+01:00 (in 29.996184 seconds)
+2021-11-22 15:16:35,503 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-22 15:16:35,525 INFO werkzeug MainThread :  * Debugger PIN: 269-649-333
+2021-11-22 15:16:35,551 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-11-22 15:17:03,268 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:17:03,271 INFO apscheduler.executors.default ThreadPoolExecutor-0_0 : Running job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:17:03 CET)" (scheduled at 2021-11-22 15:17:03.257596+01:00)
+2021-11-22 15:17:03,271 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:17:33.257596+01:00 (in 29.987845 seconds)
+2021-11-22 15:17:03,281 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\apscheduler\\executors\\base.py', reloading
+2021-11-22 15:17:03,289 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\utils.py', reloading
+2021-11-22 15:17:03,285 ERROR apscheduler.executors.default ThreadPoolExecutor-0_0 : Job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:17:33 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\Jan Koøistka\AppData\Roaming\Python\Python38\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\Jan Koøistka\Desktop\Poøádek\Git\Water-garden\water_garden\utils.py", line 43, in watering_reminder
+    for name in session.Query(User).all():
+NameError: name 'session' is not defined
+2021-11-22 15:17:03,290 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\utils.py', reloading
+2021-11-22 15:17:04,460 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:17:06,578 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:17:06,580 INFO apscheduler.scheduler MainThread : Added job "watering_reminder" to job store "default"
+2021-11-22 15:17:06,581 INFO apscheduler.scheduler MainThread : Scheduler started
+2021-11-22 15:17:06,582 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:17:06,582 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:17:36.578409+01:00 (in 29.996002 seconds)
+2021-11-22 15:17:06,590 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-22 15:17:06,610 INFO werkzeug MainThread :  * Debugger PIN: 269-649-333
+2021-11-22 15:17:06,637 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-11-22 15:17:33,268 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:17:33,269 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:18:03.257596+01:00 (in 29.989393 seconds)
+2021-11-22 15:17:33,269 INFO apscheduler.executors.default ThreadPoolExecutor-0_0 : Running job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:03 CET)" (scheduled at 2021-11-22 15:17:33.257596+01:00)
+2021-11-22 15:17:33,269 ERROR apscheduler.executors.default ThreadPoolExecutor-0_0 : Job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:03 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\Jan Koøistka\AppData\Roaming\Python\Python38\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\Jan Koøistka\Desktop\Poøádek\Git\Water-garden\water_garden\utils.py", line 43, in watering_reminder
+    for name in session.Query(User).all():
+NameError: name 'session' is not defined
+2021-11-22 15:17:36,587 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:17:36,589 INFO apscheduler.executors.default ThreadPoolExecutor-0_0 : Running job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:17:36 CET)" (scheduled at 2021-11-22 15:17:36.578409+01:00)
+2021-11-22 15:17:36,590 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:18:06.578409+01:00 (in 29.990274 seconds)
+2021-11-22 15:17:36,592 ERROR apscheduler.executors.default ThreadPoolExecutor-0_0 : Job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:06 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\Jan Koøistka\AppData\Roaming\Python\Python38\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\Jan Koøistka\Desktop\Poøádek\Git\Water-garden\water_garden\utils.py", line 43, in watering_reminder
+    for name in session.Query(User).all():
+NameError: name 'session' is not defined
+2021-11-22 15:18:03,276 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:18:03,276 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:18:33.257596+01:00 (in 29.981326 seconds)
+2021-11-22 15:18:03,277 INFO apscheduler.executors.default ThreadPoolExecutor-0_0 : Running job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:33 CET)" (scheduled at 2021-11-22 15:18:03.257596+01:00)
+2021-11-22 15:18:03,278 ERROR apscheduler.executors.default ThreadPoolExecutor-0_0 : Job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:33 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\Jan Koøistka\AppData\Roaming\Python\Python38\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\Jan Koøistka\Desktop\Poøádek\Git\Water-garden\water_garden\utils.py", line 43, in watering_reminder
+    for name in session.Query(User).all():
+NameError: name 'session' is not defined
+2021-11-22 15:18:06,585 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:18:06,586 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:18:36.578409+01:00 (in 29.992220 seconds)
+2021-11-22 15:18:06,587 INFO apscheduler.executors.default ThreadPoolExecutor-0_0 : Running job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:36 CET)" (scheduled at 2021-11-22 15:18:06.578409+01:00)
+2021-11-22 15:18:06,589 ERROR apscheduler.executors.default ThreadPoolExecutor-0_0 : Job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:18:36 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\Jan Koøistka\AppData\Roaming\Python\Python38\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\Jan Koøistka\Desktop\Poøádek\Git\Water-garden\water_garden\utils.py", line 43, in watering_reminder
+    for name in session.Query(User).all():
+NameError: name 'session' is not defined
+2021-11-22 15:18:15,354 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,355 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,359 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,359 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,360 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,360 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,361 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,361 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,362 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:15,362 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\app.py', reloading
+2021-11-22 15:18:16,559 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:18:18,839 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:18:18,849 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-22 15:18:18,866 INFO werkzeug MainThread :  * Debugger PIN: 269-649-333
+2021-11-22 15:18:18,894 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-11-22 15:18:33,269 DEBUG apscheduler.scheduler APScheduler : Looking for jobs to run
+2021-11-22 15:18:33,269 DEBUG apscheduler.scheduler APScheduler : Next wakeup is due at 2021-11-22 15:19:03.257596+01:00 (in 29.988223 seconds)
+2021-11-22 15:18:33,269 INFO apscheduler.executors.default ThreadPoolExecutor-0_0 : Running job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:19:03 CET)" (scheduled at 2021-11-22 15:18:33.257596+01:00)
+2021-11-22 15:18:33,270 ERROR apscheduler.executors.default ThreadPoolExecutor-0_0 : Job "watering_reminder (trigger: interval[0:00:30], next run at: 2021-11-22 15:19:03 CET)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\Jan Koøistka\AppData\Roaming\Python\Python38\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\Jan Koøistka\Desktop\Poøádek\Git\Water-garden\water_garden\utils.py", line 43, in watering_reminder
+    for name in session.Query(User).all():
+NameError: name 'session' is not defined
+2021-11-22 15:18:45,404 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:18:45,429 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:18:47,548 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:18:47,557 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-22 15:18:47,573 INFO werkzeug MainThread :  * Debugger PIN: 269-649-333
+2021-11-22 15:18:47,600 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-11-22 15:19:10,644 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,649 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\lexers\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,659 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\lexers\\__pycache__\\_mapping.cpython-38.pyc', reloading
+2021-11-22 15:19:10,662 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\__pycache__\\modeline.cpython-38.pyc', reloading
+2021-11-22 15:19:10,667 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\__pycache__\\plugin.cpython-38.pyc', reloading
+2021-11-22 15:19:10,670 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\__pycache__\\util.cpython-38.pyc', reloading
+2021-11-22 15:19:10,675 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\formatters\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,679 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\formatters\\__pycache__\\_mapping.cpython-38.pyc', reloading
+2021-11-22 15:19:10,684 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\formatters\\__pycache__\\html.cpython-38.pyc', reloading
+2021-11-22 15:19:10,687 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\__pycache__\\formatter.cpython-38.pyc', reloading
+2021-11-22 15:19:10,690 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\styles\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,694 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\AppData\\Roaming\\Python\\Python38\\site-packages\\pygments\\__pycache__\\token.cpython-38.pyc', reloading
+2021-11-22 15:19:10,851 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,853 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\_version.cpython-38.pyc', reloading
+2021-11-22 15:19:10,863 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\Image.cpython-38.pyc', reloading
+2021-11-22 15:19:10,878 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\xml\\etree\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,886 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\xml\\etree\\__pycache__\\ElementTree.cpython-38.pyc', reloading
+2021-11-22 15:19:10,890 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\xml\\etree\\__pycache__\\ElementPath.cpython-38.pyc', reloading
+2021-11-22 15:19:10,907 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\ImageMode.cpython-38.pyc', reloading
+2021-11-22 15:19:10,911 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\TiffTags.cpython-38.pyc', reloading
+2021-11-22 15:19:10,914 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\_binary.cpython-38.pyc', reloading
+2021-11-22 15:19:10,918 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\PIL\\__pycache__\\_util.cpython-38.pyc', reloading
+2021-11-22 15:19:10,951 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\cffi\\__pycache__\\__init__.cpython-38.pyc', reloading
+2021-11-22 15:19:10,958 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\cffi\\__pycache__\\api.cpython-38.pyc', reloading
+2021-11-22 15:19:10,960 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\cffi\\__pycache__\\lock.cpython-38.pyc', reloading
+2021-11-22 15:19:10,963 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\cffi\\__pycache__\\error.cpython-38.pyc', reloading
+2021-11-22 15:19:10,967 INFO werkzeug Thread-2 :  * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\cffi\\__pycache__\\model.cpython-38.pyc', reloading
+2021-11-22 15:19:12,105 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:19:14,239 INFO apscheduler.scheduler MainThread : Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2021-11-22 15:19:14,247 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-22 15:19:14,263 INFO werkzeug MainThread :  * Debugger PIN: 269-649-333
+2021-11-22 15:19:14,288 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-11-22 15:19:46,537 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\utils.py', reloading
+2021-11-22 15:19:46,541 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\utils.py', reloading
+2021-11-22 15:19:46,543 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\utils.py', reloading
+2021-11-22 15:19:47,683 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:22:06,072 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:22:08,179 WARNING werkzeug MainThread :  * Debugger is active!
+2021-11-22 15:22:08,196 INFO werkzeug MainThread :  * Debugger PIN: 269-649-333
+2021-11-22 15:22:08,220 INFO werkzeug Thread-1 :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2021-11-22 15:24:20,396 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\views.py', reloading
+2021-11-22 15:24:20,398 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\views.py', reloading
+2021-11-22 15:24:20,398 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\views.py', reloading
+2021-11-22 15:24:20,398 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\views.py', reloading
+2021-11-22 15:24:20,399 INFO werkzeug Thread-2 :  * Detected change in 'C:\\Users\\Jan Koøistka\\Desktop\\Poøádek\\Git\\Water-garden\\water_garden\\views.py', reloading
+2021-11-22 15:24:20,399 INFO werkzeug Thread-2 :  * Detected change in 'c:\\users\\jan koøistka\\desktop\\poøádek\\git\\water-garden\\water_garden\\views.py', reloading
+2021-11-22 15:24:21,640 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:28:05,740 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:28:18,421 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:29:11,660 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:30:36,450 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:38:26,821 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:40:24,761 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 15:40:58,169 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:48:33,580 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:48:59,374 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:49:32,912 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:49:43,083 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:49:53,074 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:50:26,910 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:51:38,041 INFO werkzeug MainThread :  * Restarting with windowsapi reloader
+2021-11-22 16:53:37,056 INFO werkzeug MainThread :  * Restarting with windowsapi reloader

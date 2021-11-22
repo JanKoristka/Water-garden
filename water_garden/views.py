@@ -9,8 +9,8 @@ from water_garden.extensions import db, login_manager
 import logging
 
 
-logging.basicConfig(filename='record.log', level=logging.DEBUG, format=
-f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+#logging.basicConfig(filename='record.log', level=logging.DEBUG, format=
+#f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 blueprint = Blueprint("views", __name__, static_folder="/static", template_folder='/templates')
@@ -23,7 +23,7 @@ def load_user(user_id):
 
 @blueprint.route('/')
 def home():
-    blueprint.logger.info('Info level log')
+    #blueprint.logger.info('Info level log')
     return render_template("index.html", logged_in=current_user.is_authenticated)
 
 

@@ -1,12 +1,13 @@
 import smtplib
 import requests
 from datetime import datetime
-from water_garden.models import User, Plant, Watering
+from water_garden.models import User
+from water_garden.extensions import db
 
 
 def send_email(flowers, positions):
-    MY_EMAIL = "korist.h@gmail.com"
-    MY_PASSWORD = "eqfgemst1564"
+    MY_EMAIL = "xxxxxx"
+    MY_PASSWORD = "xxxxx"
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
@@ -40,13 +41,15 @@ def get_image(name):
 def watering_reminder(app):
     today = datetime.now().date()
     flower_to_water = {}
-    for name in session.Query(User).all():
-        flower_to_water[name] = {}
-        flower_to_water[name]["flower"] = []
-        flower_to_water[name]["position"] = []
-        user_email = name.email
-        for plant in name.watering:
-            #if (today - plant.date_created) % plant.water_needs == 0:
-            flower_to_water[name].append(plant)
-    for user,flowers in flower_to_water.items():
-        send_email(user,flowers)
+    with app.app_context():
+        query = db.session.query(User)
+        for user in query:
+            flower_to_water[user] = {}
+            flower_to_water[user]["flower"] = []
+            flower_to_water[user]["position"] = []
+            for plant in user.watering:
+                if (today - plant.date_created).days % plant.water_needs == 0:
+                    flower_to_water[user]["flower"].append(plant.plant_id)
+                    flower_to_water[user]["position"].append(plant.position)
+    for flowers,position in flower_to_water.items():
+        print(flowers, position)
