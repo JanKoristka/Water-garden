@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from water_garden.extensions import db
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +17,7 @@ class Plant(db.Model):
     name = db.Column(db.String(250), unique=True, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
     watering = db.relationship("Watering", back_populates="plant")
+
 
 class Watering(db.Model):
     __tablename__ = 'watering'

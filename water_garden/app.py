@@ -39,6 +39,7 @@ def register_extensions(app):
     login_manager.init_app(app)
     return None
 
+
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(views.blueprint)

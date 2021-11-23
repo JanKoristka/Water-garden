@@ -1,7 +1,7 @@
 import smtplib
 import requests
 from datetime import datetime
-from water_garden.models import User, Plant
+from water_garden.models import User
 from water_garden.extensions import db
 
 
@@ -21,8 +21,9 @@ def send_email(email, flowers, positions):
             msg=final_msg
     )
 
+
 def get_image(name):
-    S = requests.Session()
+    request = requests.Session()
     URL = "https://en.wikipedia.org/w/api.php"
     PARAMS = {
             "action": "query",
@@ -32,10 +33,11 @@ def get_image(name):
             "formatversion": 2,
             "pithumbsize": 500,
     }
-    R = S.get(url=URL, params=PARAMS)
-    DATA = R.json()
-    page_source = DATA['query']['pages'][0]['thumbnail']['source']
+    response = request.get(url=URL, params=PARAMS)
+    data = response.json()
+    page_source = data['query']['pages'][0]['thumbnail']['source']
     return page_source
+
 
 def watering_reminder(app):
     today = datetime.now().date()

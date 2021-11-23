@@ -4,19 +4,18 @@
 {{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 {% endblock %}
-{% block title %} Add houseplants  {% endblock %}
-{% block navbar %}
 
+{% block title %} Add houseplants  {% endblock %}
+
+{% block navbar %}
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
         <a class="nav-link" href="{{ url_for('views.logout') }}">Log Out</a>
     </li>
 </ul>
-
 {% endblock %}
 
 {% block content %}
-
 <div class="jumbotron text-center">
     <div class="container">
         <h1 class="display-4">🪴️ My Garden 🪴</h1>
@@ -48,5 +47,4 @@
           <p class="copyright text-muted">Built with all the love in the world by Jan Kořistka</p>
     </div>
 </footer>
-
 {% endblock %}
