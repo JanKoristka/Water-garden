@@ -1,3 +1,5 @@
+"""Utils module. Containing get_image function that is responsible for displaying the plant image and
+watering_reminder and send_email which are both responsible for the BackgroundScheduler working properly."""
 import smtplib
 import requests
 from datetime import datetime
@@ -6,6 +8,8 @@ from water_garden.extensions import db
 
 
 def send_email(email, flowers, positions):
+    """Send alert email to the user every time his plants need water."""
+
     MY_EMAIL = "xxxxxxx"
     MY_PASSWORD = "xxxxxxx"
     with smtplib.SMTP("smtp.gmail.com") as connection:
@@ -23,6 +27,8 @@ def send_email(email, flowers, positions):
 
 
 def get_image(name):
+    """Gets image source of requested house plant from wikipedia.org."""
+
     request = requests.Session()
     URL = "https://en.wikipedia.org/w/api.php"
     PARAMS = {
@@ -40,6 +46,8 @@ def get_image(name):
 
 
 def watering_reminder(app):
+    """Checking per user if his plants need to be watered."""
+
     today = datetime.now().date()
     flower_to_water = {}
     with app.app_context():

@@ -1,0 +1,44 @@
+INFO 2021-11-23 17:27:27,126 [views.py:home:23] Processing default request
+INFO 2021-11-23 17:27:31,410 [views.py:logout:87] User logged of.
+INFO 2021-11-23 17:27:31,434 [views.py:home:23] Processing default request
+INFO 2021-11-23 17:27:56,339 [views.py:register:55] New user has been registered
+INFO 2021-11-23 17:28:04,709 [views.py:login:78] User successfully logged in.
+INFO 2021-11-23 17:28:13,719 [views.py:add:114] User added new plant to the garden
+INFO 2021-11-23 17:30:33,694 [views.py:add:114] <User 4> added new plant to the garden
+INFO 2021-11-23 17:32:02,227 [views.py:add:114] kamila@email.cz added new plant to the garden
+INFO 2021-11-23 17:32:39,424 [views.py:logout:87] User logged of.
+INFO 2021-11-23 17:32:39,436 [views.py:home:23] Processing default request
+WARNING 2021-11-23 17:37:37,195 [views.py:login:69] User email does not exist
+INFO 2021-11-23 17:37:43,781 [views.py:login:78] jan successfully logged in.
+INFO 2021-11-23 17:38:04,897 [views.py:add:114] jan added new plant to the garden
+INFO 2021-11-23 17:39:19,797 [views.py:add:114] jan@email.cz added new plant to the garden
+INFO 2021-11-23 17:41:56,930 [views.py:logout:87] User logged of.
+INFO 2021-11-23 17:41:56,946 [views.py:home:23] Processing default request
+INFO 2021-11-23 17:47:08,087 [views.py:login:79] jan@email.cz successfully logged in.
+INFO 2021-11-23 17:47:08,101 [views.py:about:30] jan@email.cz is reading about app
+INFO 2021-11-23 17:47:10,958 [views.py:photo:159] jan@email.cz viewed plant photo
+WARNING 2021-11-23 17:49:47,488 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:50:40,505 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:52:11,395 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:53:18,817 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:53:20,346 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+INFO 2021-11-23 17:54:02,339 [views.py:home:23] Processing default request
+WARNING 2021-11-23 17:54:14,871 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:55:28,913 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:55:31,049 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:55:34,388 [views.py:add:118] jan@email.cz inputted incorrect name of the plant
+INFO 2021-11-23 17:56:01,511 [views.py:about:30] jan@email.cz is reading about app
+INFO 2021-11-23 17:56:09,019 [views.py:logout:88] User logged of.
+INFO 2021-11-23 17:56:09,042 [views.py:home:23] Processing default request
+WARNING 2021-11-23 17:56:18,321 [views.py:login:70] User email does not exist
+WARNING 2021-11-23 17:56:24,036 [views.py:login:70] User email does not exist
+WARNING 2021-11-23 17:56:29,984 [views.py:login:70] User email does not exist
+WARNING 2021-11-23 17:56:35,300 [views.py:login:70] User email does not exist
+WARNING 2021-11-23 17:56:42,011 [views.py:login:70] User email does not exist
+WARNING 2021-11-23 17:56:53,671 [views.py:register:39] User is already registered
+INFO 2021-11-23 17:56:58,683 [views.py:login:79] zdena@email.cz successfully logged in.
+INFO 2021-11-23 17:56:58,698 [views.py:about:30] zdena@email.cz is reading about app
+INFO 2021-11-23 17:57:05,420 [views.py:photo:159] zdena@email.cz viewed plant photo
+WARNING 2021-11-23 17:57:18,376 [views.py:add:118] zdena@email.cz inputted incorrect name of the plant
+WARNING 2021-11-23 17:59:42,019 [views.py:add:118] zdena@email.cz inputted incorrect name of the plant
+INFO 2021-11-23 20:50:07,190 [views.py:home:23] Processing default request

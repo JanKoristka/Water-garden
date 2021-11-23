@@ -17,6 +17,7 @@ def create_app():
     """
     print(__name__.split(".")[0])
     app = Flask(__name__)
+    type(app)
     app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
     Bootstrap(app)
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///my_plants.db"
@@ -44,4 +45,3 @@ def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(views.blueprint)
     return None
-

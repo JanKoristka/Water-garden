@@ -1,8 +1,10 @@
+"""Models module. Containing three classes - db tables - User, Plant, Watering."""
 from flask_login import UserMixin
 from water_garden.extensions import db
 
 
 class User(UserMixin, db.Model):
+    """Table for user information."""
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
@@ -12,6 +14,7 @@ class User(UserMixin, db.Model):
 
 
 class Plant(db.Model):
+    """Table for unique plant names and images."""
     __tablename__ = 'plant'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), unique=True, nullable=False)
@@ -20,6 +23,7 @@ class Plant(db.Model):
 
 
 class Watering(db.Model):
+    """Table for watering info."""
     __tablename__ = 'watering'
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.Date, nullable=False)

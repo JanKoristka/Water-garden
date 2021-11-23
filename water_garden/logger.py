@@ -1,3 +1,5 @@
+"""Logger module. Setting up logger for debugging purposes and for try to make sense
+for what happened in production."""
 import logging
 
 logger = logging.getLogger(__name__)
