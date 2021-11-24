@@ -45,3 +45,16 @@ INFO 2021-11-23 20:50:07,190 [views.py:home:23] Processing default request
 INFO 2021-11-23 22:16:34,000 [views.py:add:124] zdena@email.cz added new plant to his garden
 INFO 2021-11-23 22:17:01,131 [views.py:home:23] Processing default request
 INFO 2021-11-24 14:00:41,049 [views.py:home:23] Processing default request
+INFO 2021-11-24 17:10:46,473 [views.py:home:23] Processing default request
+INFO 2021-11-24 17:10:50,538 [views.py:home:23] Processing default request
+WARNING 2021-11-24 17:11:52,981 [views.py:register:32] User is already registered
+INFO 2021-11-24 17:11:57,030 [views.py:login:72] sam@email.cz successfully logged in.
+INFO 2021-11-24 17:11:57,050 [views.py:about:89] sam@email.cz is reading about app
+INFO 2021-11-24 17:12:56,502 [views.py:add:124] sam@email.cz added new plant to his garden
+INFO 2021-11-24 17:13:43,748 [views.py:photo:162] sam@email.cz viewed plant photo
+WARNING 2021-11-24 17:13:48,755 [views.py:delete:153] sam@email.cz deleted plant from his garden
+INFO 2021-11-24 17:13:56,767 [views.py:add:124] sam@email.cz added new plant to his garden
+INFO 2021-11-24 17:26:43,185 [views.py:logout:82] User logged of.
+INFO 2021-11-24 17:26:43,198 [views.py:home:23] Processing default request
+INFO 2021-11-24 17:26:57,067 [views.py:login:72] jan@email.cz successfully logged in.
+INFO 2021-11-24 17:26:57,083 [views.py:about:89] jan@email.cz is reading about app
