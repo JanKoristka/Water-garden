@@ -12,7 +12,7 @@ class AddPlant(FlaskForm):
                          format="%Y-%m-%d",
                          default=datetime.now().date(),
                          validators=[DataRequired()])
-    position = StringField("Room in your house:", validators=[DataRequired()])
+    position = StringField("Place in your house:", validators=[DataRequired()])
     water = IntegerField("Water needs every:(days)", validators=[DataRequired()])
     add = SubmitField("Add plant")
 

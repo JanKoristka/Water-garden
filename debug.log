@@ -42,3 +42,6 @@ INFO 2021-11-23 17:57:05,420 [views.py:photo:159] zdena@email.cz viewed plant ph
 WARNING 2021-11-23 17:57:18,376 [views.py:add:118] zdena@email.cz inputted incorrect name of the plant
 WARNING 2021-11-23 17:59:42,019 [views.py:add:118] zdena@email.cz inputted incorrect name of the plant
 INFO 2021-11-23 20:50:07,190 [views.py:home:23] Processing default request
+INFO 2021-11-23 22:16:34,000 [views.py:add:124] zdena@email.cz added new plant to his garden
+INFO 2021-11-23 22:17:01,131 [views.py:home:23] Processing default request
+INFO 2021-11-24 14:00:41,049 [views.py:home:23] Processing default request
