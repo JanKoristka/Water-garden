@@ -1,6 +1,6 @@
 #Water - garden app
 
-Simple flask app which will help user better maintain his house plants.  
+Simple flask app which will help users better maintain their house plants.  
 The app will remind every user by email each time their flowers need to be water.
 
 Hope it will improve your relationship with flowers and keep your place more green!
@@ -28,7 +28,7 @@ Example:
 ####Final step:
 
 ```bash
-python water-garden/run.py
+python run.py
 ```
 
 ***
