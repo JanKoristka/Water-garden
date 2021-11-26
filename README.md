@@ -9,16 +9,10 @@ Hope it will improve your relationship with flowers and keep your place more gre
 
 ####Install requirements:
 ```bash
-conda env create -f environment.yml
+pip install -r /path/to/requirements.txt
 ```
 
-```bash
-conda activate Water-garden
-```
 
-```bash
-pip install -e .
-```
 ####In app.py define SECRET_KEY to any string:
 
 Example:
