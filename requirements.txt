@@ -23,7 +23,6 @@ tzdata==2021.5
 tzlocal==4.1
 urllib3==1.26.7
 visitor==0.1.3
--e git+ssh://git@github.com/pavelkrizek/refactor_watering.git@b92a7ad358c46bb798126b9741cab11be50bc849#egg=water_garden
 Werkzeug==2.0.2
 wincertstore==0.2
 WTForms==3.0.0
